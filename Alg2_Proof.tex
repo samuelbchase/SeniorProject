@@ -8,50 +8,43 @@
 \begin{document}
 \section{Spanning trees in connected graphs with per-vertex degree constraints}
 Assume that we wish to create a spanning tree for a graph. Correct algorithms for this problem proven by Kruskal and other
-mathematicians, however in this case we wish to consider an additional constraint. Assume that in the graph every vertex has some degree $n$,
-where for a spanning tree to be correct every vertex in the spanning tree must have a degree exactly equal to that degree $n$
+mathematicians, however in this case we wish to consider an additional constraint. Assume that in the graph every vertex has some degree constraint $d$,
+where for a spanning tree to be correct every vertex in the spanning tree must have a degree exactly equal to that degree constraint $d$
  
 \begin{theorem}
-Given a strongly connected graph $G(E,V)$ with total vertex degree of $2(n-1)$ algorithm 2 will return a spanning tree
+Given a strongly connected graph $G(E,V)$ with total vertex degree of $2(v-1)$ algorithm 2 will return a correct spanning tree
 \end{theorem}
 \begin{proof}
-%NOTE! CAN I JUST SAY THIS IS A MODIFIED PRIM'S ALGORITHM?
-Assume for $G$, our algorithm is unable to complete a spanning tree. Because our algorithm draws $v-1$ edges and only draws edges to vertices not yet touched, our graph will always attempt to touch every vertex, not create a cycle, and have the correct amount of edges. Therefore for our graph algorithm to fail a degree constraint must be violated, meaning $T$ must have a total degree of zero whilst $T$ does not contain every edge in $G$ preventing more edges from being drawn.
+Base Case: Imagine an initial tree $T$, at the completion of algorithm step 3
 \\
 \\
-For $G$, $T$ has an initial value equal to degree of the two largest vertices minus 2. All other vertices have a degree equal to the degree of $G \setminus T$. When attempting to pick the next vertex, there are 2 options:\par
+Now, assume $T$ has grown to size k vertices correctly, where $T$ has a total degree constraint large enough to complete the spanning of the graph
+\\\\
+$T$ will now select the next untouched vertex of maximum degree. There are 3 cases for this vertex:
+\\
+
     \setlength\parindent{12pt} 
     Case 1) The next vertex selected has a degree = 1 \par
         \setlength\parindent{24pt}\hangindent=24pt 
-        In this case, if the largest vertex remaining has a degree of 1 then all vertices not in $T$ must
-        have a degree of 1. Additionally, $T$ must have a degree of $2(n-1)-n$ (or $n-2$) Therefore, as there are $n-2$ vertices not in $T$ and connecting
-        a vertex to $T$ reduces the total degree of $T$ by 1 it is absurd to state that $T$ will ever be zero.
+        In this case, if the largest vertex remaining has a degree of 1 then all vertices not in $T$, $U$, must
+        have a degree of 1. Thus $T$ must have a total remaining vertex constraint of $|V \setminus U|$, which is equal to  $|U|$. Therefore as there are $|U|$ vertices not in $T$ and $T$ has a total degree constraint of $|U|$ we know the degree constraint will not be violated, as each connection from $T$ to $U$ lowers the total degree constraint by one.
         \par
         
     \setlength\parindent{12pt}
     Case 2) The next vertex selected has a degree $\geq$ 1\par
         \setlength\parindent{24pt}\hangindent=24pt 
-        Adding this vertex to $T$ will increase $T$ by some value greater than 1, and then decrease $T$ by two.
-        Therefore the change in $T$ cannot be less than zero, and thus $T$ will never be zero
+        Adding this vertex to $T$ will increase $T$'s total degree constraint by some value greater than or equal to 2, and then decrease $T$'s total degree constraint by 2.
+        Therefore the change in $T$ cannot be less than zero, and thus $T$ will not be decreased and therefore $T$ will be able to complete the spanning tree.
         \par
 
     \setlength\parindent{12pt}
     Case 3) No new vertex can be selected\par
         \setlength\parindent{24pt}\hangindent=24pt 
-        If no new vertex can be selected this means every vertex in $G$ in in $T$
+        If no new vertex can be selected this means every vertex in $G$ is in $T$
         \par
         
     \setlength\parindent{0pt}\hangindent=0pt
     Therefore it is absurd that $T$ will ever have a total degree of zero when there are vertices in $G$ not in $T$
 
 \end{proof}
-\clearpage 
-\begin{theorem}
-Given a strongly connected graph $G(E,V)$ with total vertex degree of $2(n-1)$ if algorithm 2 returns a spanning tree it will be correct
-\end{theorem}
-
-\begin{proof}
-Assume our algorithm returns an incorrect spanning tree for $G$. Our algorithm must necessarily cover every edge, as all the edges will have connections equal to their degree, and no degree can be zero. Additionally our spanning tree will feature $n-1$ edges, where n is the number of vertices, due to the total vertex degree constraint of $2(n-1)$. Therefore, as every vertex is touched, and the total number of edges is equal to $n-1$, the returned tree must be a spanning tree.
-\end{proof}
-
-\end{document}
+end{document}
