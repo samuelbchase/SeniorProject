@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class GraphTest {
+public class Algorithm1 {
 
     public static void main(String[] args) throws Exception{
         //This code runs a single test of size 1024
