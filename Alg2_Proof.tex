@@ -12,10 +12,10 @@ mathematicians, however in this case we wish to consider an additional constrain
 where for a spanning tree to be correct every vertex in the spanning tree must have a degree exactly equal to that degree constraint $d$
  
 \begin{theorem}
-Given a strongly connected graph $G(E,V)$ with total vertex degree of $2(v-1)$ algorithm 2 will return a correct spanning tree
+Given a strongly connected graph $G(E,V)$ with total vertex degree constraint of $2(|V|-1)$ algorithm 2 will return a correct spanning tree
 \end{theorem}
 \begin{proof}
-Base Case: Imagine an initial tree $T$, at the completion of algorithm step 3
+Imagine an initial tree $T$, at the completion of algorithm step 3. $G \setminus T$ will have a total degree constraint of $2(|V|-1)-2$, accounting for the single edge in T. Therefore, because it has a total degree constraint of $2(|V|-2)$ and needs to connect $|V|-2$ vertices to $T$. Thus the spanning tree will be able to be completed as the number of possible edges is equal to twice the number of vertices, and $T$ will either have a total degree constraint $\geq$ 1 or be $G$. 
 \\
 \\
 Now, assume $T$ has grown to size k vertices correctly, where $T$ has a total degree constraint large enough to complete the spanning of the graph
@@ -26,14 +26,14 @@ $T$ will now select the next untouched vertex of maximum degree. There are 3 cas
     \setlength\parindent{12pt} 
     Case 1) The next vertex selected has a degree = 1 \par
         \setlength\parindent{24pt}\hangindent=24pt 
-        In this case, if the largest vertex remaining has a degree of 1 then all vertices not in $T$, $U$, must
-        have a degree of 1. Thus $T$ must have a total remaining vertex constraint of $|V \setminus U|$, which is equal to  $|U|$. Therefore as there are $|U|$ vertices not in $T$ and $T$ has a total degree constraint of $|U|$ we know the degree constraint will not be violated, as each connection from $T$ to $U$ lowers the total degree constraint by one.
+        In this case, if the largest vertex remaining has a degree constraint of 1 then all vertices not in $T$, $U$, must
+        have a degree constraint of 1. Thus $T$ must have a total remaining vertex constraint of $|V \setminus U|$, which is equal to  $|U|$. Therefore as there are $|U|$ vertices not in $T$ and $T$ has a total degree constraint of $|U|$ we know the degree constraint will not be violated, as each connection from $T$ to $U$ lowers the total degree constraint by one.
         \par
         
     \setlength\parindent{12pt}
     Case 2) The next vertex selected has a degree $\geq$ 1\par
         \setlength\parindent{24pt}\hangindent=24pt 
-        Adding this vertex to $T$ will increase $T$'s total degree constraint by some value greater than or equal to 2, and then decrease $T$'s total degree constraint by 2.
+        Adding this vertex to $T$ will increase $T$'s total degree constraint by some value $\geq$ 2, and then decrease $T$'s total degree constraint by 2.
         Therefore the change in $T$ cannot be less than zero, and thus $T$ will not be decreased and therefore $T$ will be able to complete the spanning tree.
         \par
 
