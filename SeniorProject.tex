@@ -25,7 +25,7 @@
 	
 	\section{Fast vertex cover with double star graphs \\ {\large Based on \textit{Covering by trees of small diameter} by Lov\'asz}}
 	In his paper \textit{Covering by trees of small diameter}, Lov\'asz discusses double star trees. A graph's diameter is the maximum number of edges to connect any two vertices in the graph. Double star trees are trees of diameter less than or equal to 3. A double star can be formed by taking any two star graphs, graphs featuring a central node with any number of edges connected only to that central node, and adding an edge between the central nodes of the two stars, as seen in Figure 1
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\caption{}
 		\includegraphics{Figure1}
 	\end{figure}
@@ -48,8 +48,39 @@
 				\caption{}
 				\includegraphics{Figure2}
 			\end{figure}
-		\\
 			Above, in figure 2, we see a double star graph. We know that $n$ is equal to 5. Running our greedy algorithm to find a maximal matching, we will assume we select edges c and d. This means $M = \{c,d\}$, and therefore $r = 2$. $I$ will be all vertices not touched by $M$, therefore $I = \{1\}$ and $s$ = 1. Knowing that $f_{3}(g) \leq n-r$, we can say that the maximum number of double stars necessary to cover this graph is 3. An example of this maximum cover is a cover containing double stars centered around a,b, and c. Assuming we make the odd choice of selecting $a$ and $c$ to be the centers of our first two double stars, we notice that if we add either $b$ or $d$ we will necessarily have a full cover. Although this is something our algorithm would never provide as a cover (due to $a$ and $b$ being adjacent) this shows a theoretical maximum size for the vertex cover. It is simply impossible to increase this value, knowing that no matter which edges we choose in any order we will cover the graph in at most 3 double stars.
+			
+	\section{Determining subgraphs of maximum edges on degree constrained graphs \\ {\large Based on \textit{Another look the the degree constrained subgraph problem} by Yossi Shiloach}}
+	In this paper Yossi Shiloach details a wonderful algorithm for determining subgraphs of maximum edges on a degree constrained graph $G(V,E)$. He defines
+	degree constraints in a similar way to we do, a list of numbers representing the maximum degree a vertex may have, rather than the required degree as we define degree constraint. However, rather than determining a spanning tree he wishes to find a edge set, $E'$, such that $G'(V,E')$ adheres to degree constraints, maximizing $|E'|$. The method for generating $E'$ very likely will prove useful in generalizing our own algorithm.
+	\subsection{The algorithm}
+	
+		\begin{figure}[H]
+			\caption{}
+			\includegraphics{Figure3}
+		\end{figure}
+	
+	Observed in Figure 3 is a graph, with vertex labels and maximum degrees. In order to determine the maximum subgraph $G(V,E')$ we must create graph $H$. This is done by taking every vertex, and replicating it into subvertices. A degree constraint of 2 leads to 2 subvertices, 3 leads to 3 subvertices, and so on. Then, connection vertices are created, representing each edge in $G$. Therefore, there will be a vertex created for $A$->$B$ and a vertex for $B$->$A$. $A$->$B$ will connect to every subvertex of $A$, while  $B$->$A$ will connect to every subvertex of $B$. Then $A->B$ will be connected to  $B$->$A$. This will be done for every edge in $G$, to yield a new graph $H$, depicted in figure 4.
+	
+	\begin{figure}[h]
+		\caption{}
+		\includegraphics{Figure4}
+	\end{figure}
+
+	Then a maximum matching must be drawn on $H$, such as the one depicted in Figure 5. Bolded edges are in the matching.
+	
+		\begin{figure}[H]
+		\caption{}
+		\includegraphics{Figure5}
+	\end{figure}
+	Then, one must look at the edges between the unlabeled connector vertices. If the edge between the connectors is in the matching, as in the $A$ - $B$ connector, then that edge from $G$ is not in $G'$. Otherwise that edge will be in $G'$. $G'$ is shown below in Figure 6. It can be verified that $G'$ does not violate any degree maximums, and contains a maximum edge set $E'$.
+	\begin{figure}[H]
+		\caption{}
+		\includegraphics{Figure6}
+	\end{figure}
+
+	One might notice that on certain graphs there are more than one maximum matching, which may yield different $G'$s. This is expected, as in many cases there are multiple graphs both with maximum $|E'|$. In these cases all possible $G'$s returned by the algorithm are valid.
+
 	\newtheorem{theorem}{Theorem}
 	\section{Spanning trees in connected graphs with per-vertex degree constraints}
 	Assume that we wish to create a spanning tree for a graph. Correct algorithms for this problem proven by Kruskal and other
