@@ -96,7 +96,7 @@
 			\State T = $\emptyset$
 			\State T += ($v1$,$v2$) where $v1$ is the vertex of largest degree in V, and $v2$ is the vertex of second largest degree. Decrement the degree of $v1$ and $v2$
 			\While{There exits a vertex in $V$ and $T$ with a degree $>$ 0 }
-			\State {T+= ($t$,$v$) where $t$ is the vertex of largest degree in $t$, and $v$ is the largest vertex in $V$\textbackslash$T$}
+			\State \parbox[t]{\dimexpr\linewidth-\algorithmicindent}{T+= ($t$,$v$) where $t$ is the vertex of largest degree in $t$, and $v$ is the largest vertex in $V$\textbackslash$T$\strut}
 			\EndWhile
 		\end{algorithmic}
 	\newpage
