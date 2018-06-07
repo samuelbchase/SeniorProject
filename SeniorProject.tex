@@ -37,7 +37,7 @@ sorting=ynt,
 	\newpage
 	\section{Introduction}
 	In this project, I sought to develop and prove new algorithms to create spanning trees on general graphs with per-vertex degree constraints. 
-	This means that each vertex in the graph would have some additional value, a degree constraint $d$. For a spanning tree to be every vertex, $v_{i}$ in the spanning tree must have a degree exactly equal to a vertex constraint $d_{i}$. This poses an additional constraint on what
+	This means that each vertex in the graph would have some additional value, a degree constraint $d$. For a spanning tree to be correct every vertex, $v_{i}$ in the spanning tree must have a degree exactly equal to a vertex constraint $d_{i}$. This poses an additional constraint on what
 	would otherwise be a trivial spanning tree problem. In this paper two proofs which inspired my studies will be discussed and analyzed, leading to my algorithm for determining a spanning tree on strongly connected graphs. It is my hope that in the future this algorithm can be modified to apply to the general case.
 	
 	
@@ -52,7 +52,7 @@ sorting=ynt,
 	Double stars also have the interesting property of being able to cover graphs incredibly quickly. In fact, a graph of $n$ vertices be covered by a greedy algorithm taking at most $2n/3$ steps. All that is required to cover a graph with double stars is to find a maximal matching of edges, a set of edges $E$ such that no edge can be added without touching a vertex already touched by $E$. Then, add double stars centered around those edges, where the two vertices connected to the edge are individual single stars. Lov\'asz has proved that at most $2n/3$ double stars are required to cover a graph. This paper will discuss the key determinants in a maximal double-star cover, as well as provide an example of such covers on simple graphs.
 	\subsection{Algorithm Overview}
 	
-	Lov\'asz begins by asserting that $\tau$ is the maximal number of independent vertices of $G$, a maximal set of vertices such that no two share an edge. He also states that $M$ is the maximal matching of $G$, having size $r$. $I$ is defined as the vertices which are not endpoints of any edges in $M$, with a size of $s$. If $n$ = $2r$ then $I$ = $\emptyset$.
+	Lov\'asz begins by asserting that $\tau$ is the maximal number of independent vertices of $G$, a maximal set of vertices such that no two share an edge. He also states that $M$ is the maximal matching of $G$, having size $r$. $I$ is defined as the set of vertices which are not endpoints of any edges in $M$, with a size of $s$. If $n$ = $2r$ then $I$ = $\emptyset$.
 	\\\\
 	In section 2, it is stated that $f_{3}(g)$ is the maximum number of double stars required to cover a graph. We also know $f_{3}(g) \leq f_{2}(g)$, as even in a worst case scenario it is still impossible that double star graphs cover less efficiently than single stars. This leads Lov\'asz to know that $n-\tau \leq n-s = 2r$, or the number of vertices minus independent vertices is less than or equal to the vertices minus the vertices contained in $I$, which is equal to the number of vertices in $M$.
 	\\\\
@@ -108,8 +108,8 @@ sorting=ynt,
 	\subsection{Algorithm Overview}
 	Assume that we wish to create a spanning tree for a graph. Correct algorithms for solving this problem have been proven by Kruskal and other
 	mathematicians, however, in this case, we wish to consider per-vertex degree constraints. Assume that in the graph every vertex, $v_{i}$, has some degree constraint $d_{i}$,
-	where for a spanning tree to be valid, every vertex in the spanning tree must have a degree exactly equal to the degree constraint $d$. 
-	\\\\\\\\
+	where for a spanning tree to be valid $v_{i}$ must be equal to $d_{i}$ for all $v_{i} \in V$
+	\\\\\\\\\\
 	
 	An algorithm for solving this problem can be seen below:
 	\\
