@@ -43,13 +43,13 @@ sorting=ynt,
 	
 	
 	\section{Fast vertex cover with double star graphs \\ {\small Based on "Covering by trees of small diameter" by Lov\'asz \cite{1}} }
-	In his paper "Covering by trees of small diameter", Lov\'asz discusses double star graphs. A graph's diameter is the maximum number of edges to connect any two vertices in the graph. Double star graphs are graphs of diameter less than or equal to 3. A double star can be formed by adding an edge between the central nodes of any two star graphs, graphs featuring a central node with any number of edges connected only to that central node, as seen in Figure 1.
+	In his paper "Covering by trees of small diameter," Lov\'asz discusses double star graphs. A graph's diameter is the maximum number of edges to connect any two vertices in the graph. Double star graphs are graphs of diameter less than or equal to 3. A double star can be formed by adding an edge between the central nodes of any two star graphs, graphs featuring a central node with any number of edges connected only to that central node, as seen in Figure 1.
 	\begin{figure}[H]
 		\caption{}
 		\includegraphics{Figure1}
 	\end{figure}
 	
-	Double stars also have the interesting property of being able to cover graphs incredibly quickly. In fact, a graph of $n$ vertices be covered by a greedy algorithm taking at most $2n/3$ steps. All that is required to cover a graph with double stars is to find a maximal matching of edges, a set of edges $E$ such that no edge can be added without touching a vertex already touched by $E$. Then, add double stars centered around those edges, where the two vertices connected to the edge are individual single stars. Lov\'asz has proved that at most $2n/3$ double stars are required to cover a graph. This paper will discuss the key determinants in a maximal double-star cover, as well as provide an example of such covers on simple graphs.
+	Double stars also have the interesting property of being able to cover graphs incredibly quickly. In fact, a graph of $n$ vertices can be covered by a greedy algorithm taking at most $2n/3$ steps. All that is required to cover a graph with double stars is to find a maximal matching of edges, a set of edges $E$ such that no edge can be added without touching a vertex already touched by $E$. Then, add double stars centered around those edges, where the two vertices connected to the edge are individual single stars. Lov\'asz has proved that at most $2n/3$ double stars are required to cover a graph. This paper will discuss the key determinants in a maximal double-star cover, as well as provide an example of such covers on simple graphs.
 	\subsection{Algorithm Overview}
 	
 	Lov\'asz begins by asserting that $\tau$ is the maximal number of independent vertices of $G$, a maximal set of vertices such that no two share an edge. He also states that $M$ is the maximal matching of $G$, having size $r$. $I$ is defined as the set of vertices which are not endpoints of any edges in $M$, with a size of $s$. If $n$ = $2r$ then $I$ = $\emptyset$.
@@ -61,7 +61,7 @@ sorting=ynt,
 	Combining what is learned in section 4 we are able to prove Lov\'asz's theorem, that $f_{3}(g) \leq 2n/3$.
 	
 		\subsection{Example}
-		Presented in Figure 2 is an example of graph. It may be noted that this graph itself is a double star. This reveals some of the inefficiency with this algorithm - even when a small cover (potentially even one of size 1) is available, a larger cover may be selected simply because of the nature of the greedy algorithm. It is possible for this algorithm to return multiple valid covers, depending on the sequence of selected edges.
+		Presented in Figure 2 is an example graph. It may be noted that this graph itself is a double star. This reveals some of the inefficiency with this algorithm - even when a small cover (potentially even one of size 1) is available, a larger cover may be selected simply because of the nature of the greedy algorithm. It is possible for this algorithm to return multiple valid covers, depending on the sequence of selected edges.
 		 \\
 				\begin{figure}[H]
 				\caption{}
@@ -80,7 +80,7 @@ sorting=ynt,
 			\includegraphics{Figure3}
 		\end{figure}
 	
-	Observed in Figure 3 is a graph, with vertex labels and maximum degrees. In order to determine the maximum subgraph $G'(V,E')$ we must create graph $H$. This is done by taking every vertex, and replicating it into subvertices. A degree constraint of two produces two subvertices, a constraint of three produces three subvertices, and so on. Then, connection vertices are created, representing each edge in $G$. Therefore, as depicted in Figure 4,there will be a vertex created for $A$->$B$ and a vertex for $B$->$A$. $A$->$B$ will connect to every subvertex of $A$, while  $B$->$A$ will connect to every subvertex of $B$. Then $A$->$B$ will be connected to  $B$->$A$. This will be done for every edge in $G$, to yield a new graph $H$.
+	Observed in Figure 3 is a graph, with vertex labels and maximum degrees. In order to determine the maximum subgraph $G'(V,E')$ we must create graph $H$. This is done by taking every vertex, and replicating it into subvertices. A degree constraint of two produces two subvertices, a constraint of three produces three subvertices, and so on. Then, connection vertices are created, representing each edge in $G$. Therefore, as depicted in Figure 4, there will be a vertex created for $A$->$B$ and a vertex for $B$->$A$. $A$->$B$ will connect to every subvertex of $A$, while  $B$->$A$ will connect to every subvertex of $B$. Then $A$->$B$ will be connected to  $B$->$A$. This will be done for every edge in $G$, to yield a new graph $H$.
 	
 	\begin{figure}[H]
 		\caption{}
@@ -108,7 +108,7 @@ sorting=ynt,
 	\subsection{Algorithm Overview}
 	Assume that we wish to create a spanning tree for a graph. Correct algorithms for solving this problem have been proven by Kruskal and other
 	mathematicians, however, in this case, we wish to consider per-vertex degree constraints. Assume that in the graph every vertex, $v_{i}$, has some degree constraint $d_{i}$,
-	where for a spanning tree to be valid $v_{i}$ must be equal to $d_{i}$ for all $v_{i} \in V$
+	where for a spanning tree to be valid $v_{i}$ must be equal to $d_{i}$ for all $v_{i} \in V$.
 	\\\\\\\\\\
 	
 	An algorithm for solving this problem can be seen below:
@@ -141,8 +141,8 @@ sorting=ynt,
 		\setlength\parindent{12pt} 
 		Case 1) The next vertex selected has a degree = 1 \par
 		\setlength\parindent{24pt}\hangindent=24pt 
-		In this case, if the largest vertex remaining has a degree constraint of 1 then all vertices not in $T$, called $U$, must
-		have a degree constraint of 1. Thus $T$ must have a total remaining vertex constraint of $|V \setminus U|$, which is equal to  $|U|$. Therefore, as there are $|U|$ vertices not in $T$ and $T$ has a total degree constraint of $|U|$, we know the degree constraint will not be violated, as each connection from $T$ to $U$ lowers the total degree constraint by one.  Thus $T$ will be able to complete the spanning tree.
+		In this case, if the largest vertex remaining has a degree constraint of 1, then all vertices not in $T$, called $U$, must
+		have a degree constraint of 1. Thus, $T$ must have a total remaining vertex constraint of $|V \setminus U|$, which is equal to  $|U|$. Therefore, as there are $|U|$ vertices not in $T$ and $T$ has a total degree constraint of $|U|$, we know the degree constraint will not be violated, as each connection from $T$ to $U$ lowers the total degree constraint by one.  Thus, $T$ will be able to complete the spanning tree.
 		\par
 
 
@@ -151,9 +151,9 @@ sorting=ynt,
 		Case 2) The next vertex selected has a degree $>$ 1\par
 		\setlength\parindent{24pt}\hangindent=24pt 
 		Adding this vertex to $T$ will increase $T$'s total degree constraint by some value $>$ 1, and then decrease $T$'s total degree constraint by 2.
-		Therefore the change in $T$ cannot be less than zero, and $T$ will not be decreased, so $T$ will be able to complete the spanning tree.
+		Therefore the change in $T$ cannot be less than zero, and $T$ will not be decreased, so $T$ will be able to complete the spanning tree.\\
 		\par
-	
+
 		\vbox{%
 		\setlength\parindent{12pt}
 		Case 3) No new vertex can be selected\par
@@ -168,7 +168,7 @@ sorting=ynt,
 	\end{proof}	
 	\section{Conclusion}
 	
-	The goal of this project was to determine an algorithm to produce spanning trees on graphs with per-vertex degree constraints. I was able to produce an algorithm and proof, which work on strongly connected graphs. I hope that perhaps future researchers might modify my algorithm, and potentially utilize the techniques of Yossi Shiloach, to solve the general case.
+	The goal of this project was to determine an algorithm to produce spanning trees on graphs with per-vertex degree constraints. I was able to produce an algorithm and proof which work on strongly connected graphs. I hope that perhaps future researchers might modify my algorithm, and potentially utilize the techniques of Yossi Shiloach, to solve the general case.
 	
 	\newpage
 \invisiblesection{References}
