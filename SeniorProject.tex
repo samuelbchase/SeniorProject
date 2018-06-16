@@ -37,7 +37,7 @@ sorting=ynt,
 	\newpage
 	\section{Introduction}
 	In this project, I sought to develop and prove new algorithms to create spanning trees on general graphs with per-vertex degree constraints. 
-	This means that each vertex in the graph would have some additional value, a degree constraint $d$. For a spanning tree to be \textit{correct}, every vertex $v_{i}$ in the spanning tree must have a degree exactly equal to a vertex constraint $d_{i}$. This poses an additional constraint on what
+	This means that each vertex in the graph would have some additional value, a degree constraint $d$. For a spanning tree to be \textit{correct}, every vertex $v_{i}$ in the spanning tree must have a degree exactly equal to a degree constraint $d_{i}$. This poses an additional constraint on what
 	would otherwise be a trivial spanning tree problem. In this paper, two proofs related to my studies will be discussed and analyzed, leading to my algorithm for determining a spanning tree on strongly connected graphs. It is my hope that in the future this algorithm can be modified to apply to the general case.
 	
 	
@@ -54,7 +54,7 @@ sorting=ynt,
 	
 	Lov\'asz begins by asserting that $\tau$ is the maximal number of independent vertices of $G$, a maximal set of vertices such that no two share an edge. He also states that $M$ is the maximal matching of $G$, having size $r$. $I$ is defined as the set of vertices which are not endpoints of any edges in $M$, with a size of $s$. If $n$ = $2r$ then $I$ = $\emptyset$.
 	\\\\
-	In section 2, it is stated that $f_{3}(g)$ is the maximum number of double stars required to cover a graph. We also know $f_{3}(g) \leq f_{2}(g)$, as even in a worst case scenario it is still impossible that double star graphs cover less efficiently than single stars. This leads Lov\'asz to know that $n-\tau \leq n-s = 2r$, or the number of vertices minus independent vertices is less than or equal to the vertices minus the vertices contained in $I$, which is equal to the number of vertices in $M$.
+	In section 2, it is stated that $f_{3}(g)$ is the maximum number of double stars required to cover a graph. We also know $f_{3}(g) \leq f_{2}(g)$, as even in a worst case scenario it is still impossible that double star graphs cover less efficiently than single stars. This leads Lov\'asz to know that $n-\tau \leq n-s = 2r$, or the total number of vertices minus independent vertices is less than or equal to the total number of vertices minus the vertices contained in $I$, which is equal to the number of vertices in $M$.
 	\\\\
 	In section 3, Lov\'asz moves on to look at $S_{i}$. For each edge $e_{i}$ in $M$, there exists $S_{i}$, a double star centered around $e_{i}$. $S_{i}$ contains the two vertices at the endpoints of $e_{i}$, and all vertices adjacent to those two vertices. $T_{i}$ is the tree of all edges containing $c_{i}$ (from $I$). We know that the set of all $S$ and $T$ covers $G$. This means $f_{3}(g) \leq r + s = n - r$, or the maximum number of double stars required to cover a graph is less than or equal to the size of $M$ plus the size of $I$. This is equal to the size of $G$ minus the size of $M$.
 	\\\\
@@ -67,12 +67,12 @@ sorting=ynt,
 				\caption{}
 				\includegraphics{Figure2}
 			\end{figure}
-			In Figure 2 we know that $n$ is equal to 5. Running our greedy algorithm to find a maximal matching, assume we select edges c and d. This means $M = \{c,d\}$, and therefore $r = 2$. $I$ will be all vertices not touched by $M$, therefore $I = \{1\}$ and $s$ = 1. Knowing that $f_{3}(g) \leq n-r$, we can say that the maximum number of double stars necessary to cover this graph is 3. An example of this maximum cover is a cover containing double stars centered around $a$, $b$, and $c$. Assuming we make the odd choice of selecting $a$ and $c$ to be the centers of our first two double stars, we notice that if we add either $b$ or $d$ we will have a full cover. Although this is something our algorithm would never provide as a $M$ (as our algorithm only seeks a maximal matching, therefore both $a$ and $c$ will never be selected), this does show a theoretical maximum size for the vertex cover. It is simply impossible to increase the maximum size, knowing that no matter which edges we choose we will cover the graph in at most 3 double stars.
+			In Figure 2 we know that $n$ is equal to 5. Running our greedy algorithm to find a maximal matching, assume we select edges $c$ and $d$. This means $M = \{c,d\}$, and therefore $r = 2$. $I$ will be all vertices not touched by $M$, therefore $I = \{1\}$ and $s$ = 1. Knowing that $f_{3}(g) \leq n-r$, we can say that the maximum number of double stars necessary to cover this graph is 3. An example of this maximum cover is a cover containing double stars centered around $a$, $b$, and $c$. Assuming we make the odd choice of selecting $a$ and $c$ to be the centers of our first two double stars, we notice that if we add either $b$ or $d$ we will have a full cover. Although this is something our algorithm would never provide as a $M$ (as our algorithm only seeks a maximal matching, therefore both $a$ and $c$ will never be selected), this does show a theoretical maximum size for the vertex cover. It is simply impossible to increase the maximum size, knowing that no matter which edges we choose we will cover the graph in at most 3 double stars.
 			
 	\section{Determining subgraphs of maximum edges on degree constrained graphs \\ {\small Based on "Another look the the degree constrained subgraph problem" by Yossi Shiloach \cite{2}}  }
 	\subsection{Algorithm Overview}
 	In this paper, Yossi Shiloach details an algorithm for determining subgraphs of maximum edges on a degree constrained graph $G(V,E)$. He defines
-	degree constraints as a list of numbers representing the maximum degree of a vertex. However, rather than determining a spanning tree, he wishes to find an edge set, $E'$, such that $G'(V,E')$ adheres to degree constraints, while maximizing $|E'|$. The method for generating $E'$ will very likely  prove useful in generalizing our own algorithm.
+	degree constraints as a list of numbers representing the maximum degree of the vertices in a graph. However, rather than determining a spanning tree, he wishes to find an edge set, $E'$, such that $G'(V,E')$ adheres to degree constraints, while maximizing $|E'|$. The method for generating $E'$ will very likely  prove useful in generalizing our own algorithm.
 	\subsection{Example}
 	
 		\begin{figure}[H]
@@ -94,7 +94,7 @@ sorting=ynt,
 		\includegraphics{Figure5}
 	\end{figure}
 		 		\vbox{%
-	Then, one must look at the edges between the unlabeled connector vertices. An edge will be in $E'$, unless the edge between the connectors is in the matching, as in the $A \leftrightarrow	 B$ connector. $G'$ is shown below in Figure 6. It can be verified that $G'$ does not violate any degree constraints and contains a maximum valid edge set $E'$.
+	Then, one must look at the edges between the connector vertices. An edge will be in $E'$, unless the edge between the connectors is in the matching, as in the $A \leftrightarrow	 B$ connector. $G'$ is shown below in Figure 6. It can be verified that $G'$ does not violate any degree constraints and contains a maximum valid edge set $E'$.
 }
 	\begin{figure}[H]
 		\caption{}
@@ -132,7 +132,7 @@ sorting=ynt,
 	\end{theorem}
 
 	\begin{proof}
-		Allow the algorithm to run through step 3, producing tree $T$. $G$ will have a total degree constraint of $2(|V|-1)-2$, accounting for the single edge in T. Therefore, $G$ has a total degree constraint of $2(|V|-2)$, and needs to connect $|V|-2$ vertices to $T$. Thus it will be possible to complete the spanning tree, as the total degree constraint of $G$ is equal to twice the number of vertices not in $T$, and $T$ will either have a total degree constraint $\geq$ 1, or be $G$. 
+		Allow the algorithm to run through step 3, producing tree $T$. $G$ will have a total degree constraint of $2(|V|-1)-2$, accounting for the single edge in T. Therefore, $G$ has a total degree constraint of $2(|V|-2)$, and needs to connect $|V|-2$ vertices to $T$. Thus, it will be possible to complete the spanning tree, as the total degree constraint of $G$ is equal to twice the number of vertices not in $T$, and $T$ will either have a total degree constraint $\geq$ 1, or be $G$. 
 		\\
 		\\
 		Now, assume $T$ has grown to size k vertices correctly, where $T$ has a total degree constraint large enough to complete the spanning of the graph. $T$ will now select the next untouched vertex of maximum degree. There are 3 cases for this vertex:
@@ -158,7 +158,7 @@ sorting=ynt,
 		\setlength\parindent{12pt}
 		Case 3) No new vertex can be selected\par
 		\setlength\parindent{24pt}\hangindent=24pt 
-		If no new vertex can be selected this means every vertex in $G$ is in $T$. Thus the spanning tree will be completed.
+		If no new vertex can be selected this means every vertex in $G$ is in $T$. Thus, the spanning tree will be completed.
 		\par
 	}
 		
