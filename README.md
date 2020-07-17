@@ -1,1 +1,3 @@
-# SeniorProject
+# Senior Project - Finding Spanning Trees in Strongly Connected Graphs with Per-Vertex Degree Constraints
+In this project, I sought to develop and prove new algorithms to create spanning trees on general graphs with per-vertex degree constraints. 
+This means that each vertex in the graph would have some additional value, a degree constraint $d$. For a spanning tree to be *correct*, every vertex v{i} in the spanning tree must have a degree exactly equal to a degree constraint d{i}. This poses an additional constraint on what would otherwise be a trivial spanning tree problem. In this paper, two proofs related to my studies will be discussed and analyzed, leading to my algorithm for determining a spanning tree on strongly connected graphs. It is my hope that in the future this algorithm can be modified to apply to the general case.
